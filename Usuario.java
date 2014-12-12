@@ -50,11 +50,27 @@ public class Usuario
      */
     public void mostrarDatosUsuario()
     {
-        // Imprime por pantalla toda la información almacenada sobre el usuario
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Gramos de proteinas ingeridos: " + proteinasIng);
-        System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng);
-        System.out.println("Gramos de grasas ingeridos: " + grasasIng);
-        System.out.println("Calorias ingeridas: " + caloriasIng);
+        // Calcula el total de macronutrientes ingeridos por usuario
+        float totalMacro = proteinasIng + carbohidratosIng + grasasIng;
+        // Si el total es 0 (aun no ha comido nada), imprime un mensaje sin porcentajes
+        if (totalMacro == 0)
+        {
+            // Imprime por pantalla toda la información almacenada sobre el usuario
+            System.out.println("Nombre: " + nombre);
+            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng);
+            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng);
+            System.out.println("Gramos de grasas ingeridos: " + grasasIng);
+            System.out.println("Calorias ingeridas: " + caloriasIng);
+        }
+        // Si no es 0, calcula el % de cada macronutriente sobre el total y lo muestra en el mensaje
+        else
+        {
+            // Imprime por pantalla toda la información almacenada sobre el usuario
+            System.out.println("Nombre: " + nombre);
+            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng + "(" + ((proteinasIng/totalMacro)*100) + "%)");
+            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng + "(" + ((carbohidratosIng/totalMacro)*100) + "%)");
+            System.out.println("Gramos de grasas ingeridos: " + grasasIng + "(" + ((grasasIng/totalMacro)*100) + "%)");
+            System.out.println("Calorias ingeridas: " + caloriasIng);
+        }
     }
 }
