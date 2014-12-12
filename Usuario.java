@@ -75,7 +75,7 @@ public class Usuario
 
         // Imprime por pantalla toda la información almacenada sobre el usuario. Si ha ingerido
         // alguna cantidad de cada macronutriente, mostrara por pantalla el % del total de macronutrientes
-        // ingeridos que representa
+        // ingeridos que representa, sino solo mostrara un 0
         System.out.println("Nombre: " + nombre);
         if (proteinasIng != 0)
         {
