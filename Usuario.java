@@ -17,18 +17,24 @@ public class Usuario
     private float grasasIng;
     // Calorias totales ingeridas por el usuario
     private float caloriasIng;
+    // Almacena el nombre del alimento más calorico por cada 100 gramos consumido por el usuario
+    private String nombreCalorico;
+    // Almacena la cantidad de calorias por cada 100 gramos del alimento más calorico consumido por el usuario
+    private float caloriasAliCalorico;
 
     /**
      * Crea el usuario de la aplicacion. Introduce el nombre
      */
     public Usuario(String nombre)
     {
-        // Inicializa las variables con el nombre introducido y las demas a 0
+        // Inicializa las variables con el nombre introducido y las demas a 0 o null
         this.nombre = nombre;
         proteinasIng = 0f;
         carbohidratosIng = 0f;
         grasasIng = 0f;
         caloriasIng = 0f;
+        nombreCalorico = null;
+        caloriasAliCalorico = 0f;
     }
 
     /**
@@ -43,6 +49,13 @@ public class Usuario
         carbohidratosIng = carbohidratosIng + ((gramos/100)*alimento.getCarbohidratos());
         grasasIng = grasasIng + ((gramos/100)*alimento.getGrasas());
         caloriasIng = caloriasIng + ((gramos/100)*alimento.getCalorias());
+        // Ahora comparamos las calorias del alimento ingerido ahora con las almacenadas del alimento más calorico
+        // que hayamos tomado hasta ahora. Si es mayor, guardamos el nuevo como el más calorico. Sino no hacemos nada
+        if (alimento.getCalorias() > caloriasAliCalorico)
+        {
+            caloriasAliCalorico = alimento.getCalorias();
+            nombreCalorico = alimento.getNombre();
+        }
     }
 
     /**
@@ -73,7 +86,7 @@ public class Usuario
             System.out.println("Calorias ingeridas: " + caloriasIng);
         }
     }
-    
+
     /**
      * Devuelve las calorias consumidas hasta ahora por el usuario
      */
@@ -81,7 +94,7 @@ public class Usuario
     {
         return caloriasIng;
     }
-    
+
     /**
      * Devuelve el nombre del usuario del programa
      */
@@ -89,7 +102,7 @@ public class Usuario
     {
         return nombre;
     }
-    
+
     /**
      * Metodo para comparar la ingesta de calorias entre dos usuarios. Introduce el usuario con el que compararte
      */
@@ -111,6 +124,18 @@ public class Usuario
         else
         {
             System.out.println(nombre + " y " + nombreOtroUsuario + " han ingerido las mismas calorias");
+        }
+    }
+
+    /**
+     * Visualiza por pantalla el alimento más calorico consumido hasta ahora por el usuario
+     */
+    public void visualizaCalorico()
+    {
+        // Si hemos comido ya algo, mostrara el alimento más calorico consumido hasta ahora. Si no hemos comido aun, no mostrara nada
+        if (nombreCalorico != null)
+        {
+            System.out.println("Alimento más calórico ingerido por el usuario hasta el momento: " + nombreCalorico);
         }
     }
 }
