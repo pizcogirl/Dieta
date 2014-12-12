@@ -73,4 +73,44 @@ public class Usuario
             System.out.println("Calorias ingeridas: " + caloriasIng);
         }
     }
+    
+    /**
+     * Devuelve las calorias consumidas hasta ahora por el usuario
+     */
+    public float getCalorias()
+    {
+        return caloriasIng;
+    }
+    
+    /**
+     * Devuelve el nombre del usuario del programa
+     */
+    public String getNombre()
+    {
+        return nombre;
+    }
+    
+    /**
+     * Metodo para comparar la ingesta de calorias entre dos usuarios. Introduce el usuario con el que compararte
+     */
+    public void comparaUsuarios(Usuario usuario)
+    {
+        // Almacenamos las calorias del segundo usuario para compararlas con las nuestras
+        float caloriasOtroUsuario = usuario.getCalorias();
+        // Almacenamos tambien el nombre del segundo usuario para mostrar despues por pantalla
+        String nombreOtroUsuario = usuario.getNombre();
+        // Dependiendo de quien haya ingerido más calorias, imprimimos el mensaje correspondiente por pantalla
+        if (caloriasIng > caloriasOtroUsuario)
+        {
+            System.out.println(nombre + " ha ingerido más calorias que " + nombreOtroUsuario);
+        }
+        else if (caloriasOtroUsuario > caloriasIng)
+        {
+            System.out.println(nombreOtroUsuario + " ha ingerido más calorias que " + nombre);
+        }
+        else
+        {
+            System.out.println(nombre + " y " + nombreOtroUsuario + " han ingerido las mismas calorias");
+        }
+    }
 }
