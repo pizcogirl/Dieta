@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Representa a un usuario que usa la aplicacion de dietas
@@ -21,6 +22,8 @@ public class Usuario
     private String nombreCalorico;
     // Almacena la cantidad de calorias por cada 100 gramos del alimento más calorico consumido por el usuario
     private float caloriasAliCalorico;
+    // Lista de los alimentos consumidos por el usuario
+    private ArrayList<Alimento> listaAlimentos;
 
     /**
      * Crea el usuario de la aplicacion. Introduce el nombre
@@ -35,6 +38,8 @@ public class Usuario
         caloriasIng = 0f;
         nombreCalorico = null;
         caloriasAliCalorico = 0f;
+        // Inicializamos la ArrayList vacia
+        listaAlimentos = new ArrayList<Alimento>();
     }
 
     /**
@@ -56,6 +61,8 @@ public class Usuario
             caloriasAliCalorico = alimento.getCalorias();
             nombreCalorico = alimento.getNombre();
         }
+        // Añadimos el alimento que hemos ingerido a la lista de alimentos
+        listaAlimentos.add(alimento);
     }
 
     /**
@@ -65,26 +72,36 @@ public class Usuario
     {
         // Calcula el total de macronutrientes ingeridos por usuario
         float totalMacro = proteinasIng + carbohidratosIng + grasasIng;
-        // Si el total es 0 (aun no ha comido nada), imprime un mensaje sin porcentajes
-        if (totalMacro == 0)
+
+        // Imprime por pantalla toda la información almacenada sobre el usuario. Si ha ingerido
+        // alguna cantidad de cada macronutriente, mostrara por pantalla el % del total de macronutrientes
+        // ingeridos que representa
+        System.out.println("Nombre: " + nombre);
+        if (proteinasIng != 0)
         {
-            // Imprime por pantalla toda la información almacenada sobre el usuario
-            System.out.println("Nombre: " + nombre);
-            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng);
-            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng);
-            System.out.println("Gramos de grasas ingeridos: " + grasasIng);
-            System.out.println("Calorias ingeridas: " + caloriasIng);
+            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng + "(" + ((proteinasIng/totalMacro)*100) + "%)");
         }
-        // Si no es 0, calcula el % de cada macronutriente sobre el total y lo muestra en el mensaje
         else
         {
-            // Imprime por pantalla toda la información almacenada sobre el usuario
-            System.out.println("Nombre: " + nombre);
-            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng + "(" + ((proteinasIng/totalMacro)*100) + "%)");
-            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng + "(" + ((carbohidratosIng/totalMacro)*100) + "%)");
-            System.out.println("Gramos de grasas ingeridos: " + grasasIng + "(" + ((grasasIng/totalMacro)*100) + "%)");
-            System.out.println("Calorias ingeridas: " + caloriasIng);
+            System.out.println("Gramos de proteinas ingeridos: " + proteinasIng);
         }
+        if (carbohidratosIng != 0)
+        {
+            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng + "(" + ((carbohidratosIng/totalMacro)*100) + "%)");
+        }
+        else
+        {
+            System.out.println("Gramos de carbohidratos ingeridos: " + carbohidratosIng);
+        }
+        if (grasasIng != 0)
+        {
+            System.out.println("Gramos de grasas ingeridos: " + grasasIng + "(" + ((grasasIng/totalMacro)*100) + "%)");
+        }
+        else
+        {
+            System.out.println("Gramos de grasas ingeridos: " + grasasIng);
+        }
+        System.out.println("Calorias ingeridas: " + caloriasIng);
     }
 
     /**
@@ -136,6 +153,25 @@ public class Usuario
         if (nombreCalorico != null)
         {
             System.out.println("Alimento más calórico ingerido por el usuario hasta el momento: " + nombreCalorico);
+        }
+    }
+
+    /**
+     * Permite visualizar los datos nutricionales por cada 100 gramos de cualquier alimento previamente
+     * ingerido, introduciendo su posición de ingesta
+     */
+    public void mostrarDatosNutricionales(int index)
+    {
+        // Si el indice introducido es valido, mostrara los datos nutricionales del alimento
+        if ((index >= 0) && (index < listaAlimentos.size()))
+        {
+            Alimento alimentoAMostrar = listaAlimentos.get(index);
+            alimentoAMostrar.muestraDatos();
+        }
+        // Si es un indice no valido, muestra un mensaje de error
+        else
+        {
+            System.out.println("El indice introducido no es valido");
         }
     }
 }
