@@ -77,4 +77,36 @@ public class Alimento
         System.out.println("Calorias: " + calorias);
         System.out.println("Componente/s mayoritario/s: " + nombreMayoritario);
     }
+    
+    /**
+     * Devuelve las proteinas de un alimento por cada 100 gramos
+     */
+    public float getProteinas()
+    {
+        return proteinas;
+    }
+    
+      /**
+     * Devuelve los carbohidratos de un alimento por cada 100 gramos
+     */
+    public float getCarbohidratos()
+    {
+        return carbohidratos;
+    }
+    
+      /**
+     * Devuelve las grasas de un alimento por cada 100 gramos
+     */
+    public float getGrasas()
+    {
+        return grasas;
+    }
+    
+      /**
+     * Devuelve las calorias de un alimento por cada 100 gramos
+     */
+    public float getCalorias()
+    {
+        return calorias;
+    }
 }
